@@ -1,36 +1,45 @@
+/* Variáveis globais para cores e fontes */
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --primary-color: #0E6251; /* Verde escuro */
+  --secondary-color: #117A65; /* Verde médio */
+  --accent-color: #B3FFAB; /* Verde claro */
+  --background-gradient: linear-gradient(135deg, #B3FFAB, #12FFF7);
+  --card-background: #E8F8F5; /* Fundo dos cards */
+  --text-color: #0B5345; /* Cor principal do texto */
+  --text-secondary-color: #117A65; /* Cor secundária do texto */
+  --button-hover-color: #0B5345; /* Cor do botão ao passar o mouse */
+  --font-family: "Avenir", "Helvetica", "Arial", sans-serif;
+  --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family);
+  color: var(--text-color);
+  background: var(--background-gradient);
   line-height: 1.5;
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
+  min-height: 100vh;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
+h1, h2, h3, h4, h5, h6 {
   margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
+  font-weight: 600;
+  color: var(--primary-color);
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+a {
+  color: var(--secondary-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--primary-color);
 }
 
 button {
@@ -40,27 +49,76 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--primary-color);
+  color: #fff;
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  box-shadow: var(--box-shadow);
 }
+
 button:hover {
-  border-color: #646cff;
+  background-color: var(--button-hover-color);
+  border-color: var(--button-hover-color);
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+input, textarea {
+  border: 1px solid var(--primary-color);
+  border-radius: 8px;
+  padding: 0.5em;
+  font-size: 1em;
+  font-family: inherit;
+  background-color: var(--card-background);
+  color: var(--text-color);
+  transition: border-color 0.3s ease;
+}
+
+input:focus, textarea:focus {
+  border-color: var(--secondary-color);
+  outline: none;
+}
+
+.card {
+  background-color: var(--card-background);
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
+  padding: 20px;
+  color: var(--text-color);
+}
+
+header {
+  background: var(--background-gradient);
+  color: var(--primary-color);
+  padding: 20px;
+  text-align: center;
+  box-shadow: var(--box-shadow);
+}
+
+footer {
+  background: transparent;
+  color: var(--primary-color);
+  text-align: center;
+  padding: 20px;
+  font-size: 0.9em;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    --primary-color: #0B5345;
+    --secondary-color: #117A65;
+    --accent-color: #B3FFAB;
+    --background-gradient: linear-gradient(135deg, #E8F8F5, #B3FFAB);
+    --card-background: #ffffff;
+    --text-color: #213547;
+    --text-secondary-color: #117A65;
+    --button-hover-color: #0B5345;
   }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
+
+  body {
+    background: var(--background-gradient);
   }
 }

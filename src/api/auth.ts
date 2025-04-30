@@ -1,7 +1,7 @@
 import { LoginResponse } from "../types/loginResponse";
 import backendClient from "./backendClient";
 
-class AuthService {
+class AuthApi {
   async login(obj: LoginResponse): Promise<void> {
     try {
       const response = await backendClient.post<{
@@ -26,5 +26,5 @@ class AuthService {
   }
 }
 
-const authService = new AuthService();
+const authService = new AuthApi();
 export default authService;

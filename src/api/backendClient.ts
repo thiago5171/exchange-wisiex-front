@@ -1,5 +1,4 @@
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 const API_BASE_URL = "http://localhost:3000";
 
@@ -27,10 +26,8 @@ backendClient.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response && error.response.status === 401) {
-      const navigate = useNavigate();
-      navigate("/login");
-
-      console.error("Não autorizado. Redirecionando para login...");
+      localStorage.removeItem("jwtToken");
+      window.location.href = "/login";
     }
     return Promise.reject(error);
   }
