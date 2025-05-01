@@ -1,13 +1,33 @@
 import { Card, Table, Row, Col, Tag } from "antd";
 import { myActiveOrder } from "../types/order";
 import { CloseSquareOutlined } from "@ant-design/icons";
+import orderApi from "../api/order";
 
 interface MyActiveOrderProps {
   data: myActiveOrder[];
-  onCancel: (id: string) => void;
+  toastMessage?: any;
 }
 
-function MyActiveOrder({ data, onCancel }: MyActiveOrderProps) {
+function MyActiveOrder({ data, toastMessage }: MyActiveOrderProps) {
+  const handleCancel = (id: string) => {
+    orderApi
+      .cancel(id)
+      .then((response) => {
+        console.log("Order cancelled successfully:", response);
+        toastMessage.open({
+          type: "success",
+          content: "Ordem cancelada com sucesso!",
+        });
+      })
+      .catch((error) => {
+        console.error("Error cancelling order:", error);
+        toastMessage.open({
+          type: "error",
+          content: "Erro ao cancelar a ordem. Tente novamente.",
+        });
+      });
+  };
+
   return (
     <Row gutter={[16, 16]}>
       <Col xs={24}>
@@ -52,7 +72,7 @@ function MyActiveOrder({ data, onCancel }: MyActiveOrderProps) {
                   <CloseSquareOutlined
                     width={20}
                     height={20}
-                    onClick={() => onCancel(record.id)}
+                    onClick={() => handleCancel(record.id)}
                     style={{
                       fontSize: "20px",
                       cursor: "pointer",

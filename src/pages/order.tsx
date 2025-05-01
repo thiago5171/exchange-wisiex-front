@@ -1,4 +1,4 @@
-import { Layout, Card, Typography, Table, Row, Col } from "antd";
+import { Layout, Card, Typography, Table, Row, Col, message } from "antd";
 import { useWebSecketData } from "../hooks/useWebSecketData";
 
 import FormBuyAndSell from "../components/formBuyAndSell";
@@ -12,6 +12,8 @@ const { Content } = Layout;
 function Order() {
   const { orderBook, newMatchs, myHistory, myActiveOrders } =
     useWebSecketData();
+
+  const [messageApi, contextHolder] = message.useMessage();
   return (
     <Layout
       style={{
@@ -19,6 +21,7 @@ function Order() {
         background: "linear-gradient(135deg, #B3FFAB, #12FFF7)",
       }}
     >
+      {contextHolder}
       <Content>
         <Row gutter={[16, 16]}>
           <Col xs={24}>
@@ -35,15 +38,17 @@ function Order() {
                 <MyHistory data={myHistory} />
               </Col>
 
-              {/* MyActiveOrder */}
               <Col xs={24} md={8}>
-                <MyActiveOrder data={myActiveOrders} onCancel={() => {}} />
+                <MyActiveOrder
+                  data={myActiveOrders}
+                  toastMessage={messageApi}
+                />
               </Col>
             </Row>
           </Col>
 
-          <Col xs={24}>
-            <FormBuyAndSell />
+          <Col xs={24} style={{ paddingLeft: "0", paddingRight: "0" }}>
+            <FormBuyAndSell toastMessage={messageApi} />
           </Col>
         </Row>
 

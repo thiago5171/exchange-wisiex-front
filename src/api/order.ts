@@ -8,8 +8,21 @@ export class OrderApi {
     try {
       const response = await backendClient.post("/orders", orderData);
       return response.data;
-    } catch (error) {
-      throw new Error("Failed to create order. Please try again.");
+    } catch (error: any) {
+      if (error.response.data.message) {
+        throw new Error(error.response.data.message);
+      } else {
+        throw new Error("Failed to create order. Please try again.");
+      }
+    }
+  }
+
+  async cancel(orderId: string): Promise<any> {
+    try {
+      const response = await backendClient.patch(`/orders/cancel/${orderId}`);
+      return response.data;
+    } catch (error: any) {
+      throw new Error("Failed to cancel order. Please try again.");
     }
   }
 
