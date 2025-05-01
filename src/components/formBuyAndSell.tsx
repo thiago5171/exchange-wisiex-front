@@ -34,10 +34,10 @@ function FormBuyAndSell() {
         amount: Number(values.amount),
         price: Number(values.price),
       };
-      await orderApi.create(formattedValues); // Chama o método de criação de ordem
+      await orderApi.create(formattedValues);
       message.success("Ordem criada com sucesso!");
-      form.resetFields(["amount", "price"]); // Reseta os campos do formulário
-      setTotal(0); // Reseta o total
+      form.resetFields(["amount", "price"]);
+      setTotal(0);
     } catch (error) {
       message.error("Erro ao criar a ordem. Tente novamente.");
     }

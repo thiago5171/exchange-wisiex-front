@@ -3,12 +3,15 @@ import { useWebSecketData } from "../hooks/useWebSecketData";
 
 import FormBuyAndSell from "../components/formBuyAndSell";
 import StatisticPanel from "../components/statisticPanel";
+import MatchGlobals from "../components/matchGlobals";
+import MyHistory from "../components/myhistory";
+import MyActiveOrder from "../components/myActiveOrder";
 
 const { Content } = Layout;
 
 function Order() {
-  const { orderBook, newMatchs } = useWebSecketData();
-  console.log("newMatchs", newMatchs);
+  const { orderBook, newMatchs, myHistory, myActiveOrders } =
+    useWebSecketData();
   return (
     <Layout
       style={{
@@ -19,7 +22,24 @@ function Order() {
       <Content>
         <Row gutter={[16, 16]}>
           <Col xs={24}>
-            <StatisticPanel />
+            <Col xs={24}>
+              <StatisticPanel />
+            </Col>
+
+            <Row gutter={[16, 16]} style={{ marginTop: "20px" }}>
+              <Col xs={24} md={8}>
+                <MatchGlobals data={newMatchs} />
+              </Col>
+
+              <Col xs={24} md={8}>
+                <MyHistory data={myHistory} />
+              </Col>
+
+              {/* MyActiveOrder */}
+              <Col xs={24} md={8}>
+                <MyActiveOrder data={myActiveOrders} onCancel={() => {}} />
+              </Col>
+            </Row>
           </Col>
 
           <Col xs={24}>

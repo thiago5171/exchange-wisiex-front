@@ -1,5 +1,5 @@
 import { Matches } from "../types/matches";
-import { CreateOrder, OrderBook } from "../types/order";
+import { CreateOrder, OrderBook, OrderHistory } from "../types/order";
 import { Stats } from "../types/stats";
 import backendClient from "./backendClient";
 
@@ -37,6 +37,28 @@ export class OrderApi {
       return response.data;
     } catch (error) {
       throw new Error("Failed to fetch matches. Please try again.");
+    }
+  }
+
+  async getMyHistory(): Promise<OrderHistory[]> {
+    try {
+      const response = await backendClient.get<OrderHistory[]>(
+        "/matches/history"
+      );
+      return response.data;
+    } catch (error) {
+      throw new Error("Failed to fetch my history. Please try again.");
+    }
+  }
+
+  async getMyActiveOrders(): Promise<any[]> {
+    try {
+      const response = await backendClient.get<Matches[]>(
+        "/orders/my-active-orders"
+      );
+      return response.data;
+    } catch (error) {
+      throw new Error("Failed to fetch my active orders. Please try again.");
     }
   }
 }

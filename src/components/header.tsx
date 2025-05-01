@@ -1,5 +1,5 @@
 import { Layout, Typography, Button, Space } from "antd";
-import { LogoutOutlined } from "@ant-design/icons";
+import { LogoutOutlined, UserOutlined } from "@ant-design/icons";
 import { useUserHooks } from "../hooks/useUserHooks";
 
 const { Header } = Layout;
@@ -22,23 +22,21 @@ const UserHeader = () => {
         CryptoExchange
       </Title>
 
-      {/* Informações do usuário */}
       <Space size="large" align="center">
         <div>
-          <Text style={{ color: "#0B5345", fontWeight: "bold" }}>
+          <UserOutlined style={{ fontSize: "22px", color: "#0E6251" }} />
+          <Text
+            style={{
+              fontSize: "24px",
+              color: "#0B5345",
+              fontWeight: "bold",
+              paddingLeft: "10px",
+            }}
+          >
             {user?.username}
           </Text>
         </div>
-        <div>
-          <Text style={{ color: "#117A65", margin: "0 10px" }}>
-            BTC: <strong>{user?.btcBalance.toFixed(4)}</strong>
-          </Text>
-          <Text style={{ color: "#117A65" }}>
-            USD: <strong>${user?.usdBalance.toFixed(2)}</strong>
-          </Text>
-        </div>
 
-        {/* Botão de logout */}
         <Button
           type="primary"
           icon={<LogoutOutlined />}

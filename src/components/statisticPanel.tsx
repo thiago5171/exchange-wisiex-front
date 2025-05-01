@@ -55,130 +55,116 @@ function StatisticPanel() {
     >
       <Row gutter={[16, 16]}>
         <Col xs={24} sm={12} lg={8}>
-          <Text strong>
-            Último Preço:{" "}
-            <span
-              style={{
-                color: getComparison(stats?.lastPrice, previousStats?.lastPrice)
-                  .color,
-              }}
-            >
-              US$ {stats?.lastPrice?.toFixed(2)}{" "}
-              {getComparison(stats?.lastPrice, previousStats?.lastPrice).icon}
-            </span>
-          </Text>
+          <Text strong>Último Preço: </Text>
+          <span
+            style={{
+              color: getComparison(stats?.lastPrice, previousStats?.lastPrice)
+                .color,
+            }}
+          >
+            US$ {stats?.lastPrice?.toFixed(2)}{" "}
+            {getComparison(stats?.lastPrice, previousStats?.lastPrice).icon}
+          </span>
         </Col>
 
         <Col xs={24} sm={12} lg={8}>
-          <Text strong>
-            Volume BTC (24h):{" "}
-            <span
-              style={{
-                color: getComparison(
-                  stats?.btcVolume24h,
-                  previousStats?.btcVolume24h
-                ).color,
-              }}
-            >
-              {stats?.btcVolume24h?.toFixed(4)} BTC{" "}
-              {
-                getComparison(stats?.btcVolume24h, previousStats?.btcVolume24h)
-                  .icon
-              }
-            </span>
-          </Text>
+          <Text strong>Volume BTC (24h): </Text>
+          <span
+            style={{
+              color: getComparison(
+                stats?.btcVolume24h,
+                previousStats?.btcVolume24h
+              ).color,
+            }}
+          >
+            {stats?.btcVolume24h?.toFixed(4)} BTC{" "}
+            {
+              getComparison(stats?.btcVolume24h, previousStats?.btcVolume24h)
+                .icon
+            }
+          </span>
         </Col>
 
         <Col xs={24} sm={12} lg={8}>
-          <Text strong>
-            Volume USD (24h):{" "}
-            <span
-              style={{
-                color: getComparison(
-                  stats?.usdVolume24h,
-                  previousStats?.usdVolume24h
-                ).color,
-              }}
-            >
-              US$ {stats?.usdVolume24h?.toFixed(2)}{" "}
-              {
-                getComparison(stats?.usdVolume24h, previousStats?.usdVolume24h)
-                  .icon
-              }
-            </span>
-          </Text>
+          <Text strong>Volume USD (24h): </Text>
+          <span
+            style={{
+              color: getComparison(
+                stats?.usdVolume24h,
+                previousStats?.usdVolume24h
+              ).color,
+            }}
+          >
+            US$ {stats?.usdVolume24h?.toFixed(2)}{" "}
+            {
+              getComparison(stats?.usdVolume24h, previousStats?.usdVolume24h)
+                .icon
+            }
+          </span>
         </Col>
 
         <Col xs={24} sm={12} lg={8}>
-          <Text strong>
-            Máxima (24h):{" "}
-            <span
-              style={{
-                color: getComparison(stats?.high, previousStats?.high).color,
-              }}
-            >
-              US$ {stats?.high?.toFixed(2)}{" "}
-              {getComparison(stats?.high, previousStats?.high).icon}
-            </span>
-          </Text>
+          <Text strong>Máxima (24h): </Text>
+          <span
+            style={{
+              color: getComparison(stats?.high, previousStats?.high).color,
+            }}
+          >
+            US$ {stats?.high?.toFixed(2)}{" "}
+            {getComparison(stats?.high, previousStats?.high).icon}
+          </span>
         </Col>
 
         <Col xs={24} sm={12} lg={8}>
-          <Text strong>
-            Mínima (24h):{" "}
-            <span
-              style={{
-                color: getComparison(stats?.low, previousStats?.low).color,
-              }}
-            >
-              US$ {stats?.low?.toFixed(2)}{" "}
-              {getComparison(stats?.low, previousStats?.low).icon}
-            </span>
-          </Text>
+          <Text strong>Mínima (24h): </Text>
+          <span
+            style={{
+              color: getComparison(stats?.low, previousStats?.low).color,
+            }}
+          >
+            US$ {stats?.low?.toFixed(2)}{" "}
+            {getComparison(stats?.low, previousStats?.low).icon}
+          </span>
         </Col>
 
         <Col xs={24} sm={12} lg={8}>
-          <Text strong>
-            Saldo USD:{" "}
-            <span
-              style={{
-                color: getComparison(
-                  stats?.userUSDBalance,
-                  previousStats?.userUSDBalance
-                ).color,
-              }}
-            >
-              US$ {stats?.userUSDBalance?.toFixed(2)}{" "}
-              {
-                getComparison(
-                  stats?.userUSDBalance,
-                  previousStats?.userUSDBalance
-                ).icon
-              }
-            </span>
-          </Text>
+          <Text strong>Saldo USD: </Text>
+          <span
+            style={{
+              color: getComparison(
+                stats?.userUSDBalance,
+                previousStats?.userUSDBalance
+              ).color,
+            }}
+          >
+            US$ {stats?.userUSDBalance?.toFixed(2)}{" "}
+            {
+              getComparison(
+                stats?.userUSDBalance,
+                previousStats?.userUSDBalance
+              ).icon
+            }
+          </span>
         </Col>
 
         <Col xs={24} sm={12} lg={8}>
-          <Text strong>
-            Saldo BTC:{" "}
-            <span
-              style={{
-                color: getComparison(
-                  stats?.userBTCBalance,
-                  previousStats?.userBTCBalance
-                ).color,
-              }}
-            >
-              {stats?.userBTCBalance?.toFixed(4)} BTC{" "}
-              {
-                getComparison(
-                  stats?.userBTCBalance,
-                  previousStats?.userBTCBalance
-                ).icon
-              }
-            </span>
-          </Text>
+          <Text strong>Saldo BTC: </Text>
+          <span
+            style={{
+              color: getComparison(
+                stats?.userBTCBalance,
+                previousStats?.userBTCBalance
+              ).color,
+            }}
+          >
+            {stats?.userBTCBalance?.toFixed(4)} BTC{" "}
+            {
+              getComparison(
+                stats?.userBTCBalance,
+                previousStats?.userBTCBalance
+              ).icon
+            }
+          </span>
         </Col>
       </Row>
     </Card>
