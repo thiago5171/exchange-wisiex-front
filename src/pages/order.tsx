@@ -1,24 +1,46 @@
-import { Layout, Card, Typography, Table, Row, Col, message } from "antd";
+import { Layout, Row, Col, message } from "antd";
 import { useWebSecketData } from "../hooks/useWebSecketData";
 
 import FormBuyAndSell from "../components/formBuyAndSell";
 import StatisticPanel from "../components/statisticPanel";
+
+import MyActiveOrder from "../components/myActiveOrder";
+import useOrderHooks from "../hooks/useOrderHooks";
+import { useEffect } from "react";
 import MatchGlobals from "../components/matchGlobals";
 import MyHistory from "../components/myhistory";
-import MyActiveOrder from "../components/myActiveOrder";
+import BuyOrSell from "../components/buyOrSell/buyOrSell";
+import { useUserHooks } from "../hooks/useUserHooks";
 
 const { Content } = Layout;
 
 function Order() {
-  const { orderBook, newMatchs, myHistory, myActiveOrders } =
-    useWebSecketData();
+  const {
+    orderBook,
+    newMatchs,
+    loading: loadingWebsocket,
+  } = useWebSecketData();
+  const {
+    orderHistory,
+    activeOrders,
+    fetchActiveOrders,
+    fetchOrderHistory,
+    loading,
+  } = useOrderHooks();
+  const { user, fetchUser } = useUserHooks();
+
+  useEffect(() => {
+    fetchOrderHistory();
+    fetchActiveOrders();
+    fetchUser();
+  }, [newMatchs, orderBook]);
 
   const [messageApi, contextHolder] = message.useMessage();
   return (
     <Layout
       style={{
         padding: "20px",
-        background: "linear-gradient(135deg, #B3FFAB, #12FFF7)",
+        background: "linear-gradient(to right, #616161, #9bc5c3)",
       }}
     >
       {contextHolder}
@@ -26,103 +48,39 @@ function Order() {
         <Row gutter={[16, 16]}>
           <Col xs={24}>
             <Col xs={24}>
-              <StatisticPanel />
+              <StatisticPanel user={user} />
             </Col>
 
             <Row gutter={[16, 16]} style={{ marginTop: "20px" }}>
               <Col xs={24} md={8}>
-                <MatchGlobals data={newMatchs} />
+                <MatchGlobals data={newMatchs} loading={loadingWebsocket} />
               </Col>
 
               <Col xs={24} md={8}>
-                <MyHistory data={myHistory} />
+                <MyHistory data={orderHistory} loading={loading} />
               </Col>
 
               <Col xs={24} md={8}>
                 <MyActiveOrder
-                  data={myActiveOrders}
+                  data={activeOrders}
                   toastMessage={messageApi}
+                  fetchMyActiveOrders={fetchActiveOrders}
+                  loading={loading}
                 />
               </Col>
             </Row>
           </Col>
 
-          <Col xs={24} style={{ paddingLeft: "0", paddingRight: "0" }}>
-            <FormBuyAndSell toastMessage={messageApi} />
-          </Col>
-        </Row>
-
-        <Row gutter={[16, 16]} style={{ marginTop: "20px" }}>
           <Col xs={24}>
-            <Card title="Livro de Ofertas">
-              <Row gutter={[16, 16]}>
-                <Col xs={24} lg={12}>
-                  <div>
-                    <Typography.Title
-                      level={5}
-                      style={{ marginBottom: "10px" }}
-                    >
-                      Ordens de Compra
-                    </Typography.Title>
-                    <Table
-                      style={{ maxHeight: "300px", overflowY: "auto" }}
-                      dataSource={orderBook ? orderBook.bids : []}
-                      columns={[
-                        {
-                          title: "Preço (USD)",
-                          dataIndex: "price",
-                          key: "price",
-                          render: (price) => `US$ ${price.toFixed(2)}`,
-                        },
-                        {
-                          title: "Volume (BTC)",
-                          dataIndex: "volume",
-                          key: "volume",
-                          render: (volume) => `BTC ${volume.toFixed(4)}`,
-                        },
-                      ]}
-                      pagination={false}
-                      rowKey={(record) => `${record.price}-${record.volume}`}
-                      size="small"
-                    />
-                  </div>
-                </Col>
-
-                <Col xs={24} lg={12}>
-                  <div>
-                    <Typography.Title
-                      level={5}
-                      style={{ marginBottom: "10px" }}
-                    >
-                      Ordens de Venda
-                    </Typography.Title>
-                    <Table
-                      style={{ maxHeight: "300px", overflowY: "auto" }}
-                      dataSource={orderBook ? orderBook.asks : []}
-                      columns={[
-                        {
-                          title: "Preço (USD)",
-                          dataIndex: "price",
-                          key: "price",
-                          render: (price) => `US$ ${price.toFixed(2)}`,
-                        },
-                        {
-                          title: "Volume (BTC)",
-                          dataIndex: "volume",
-                          key: "volume",
-                          render: (volume) => `BTC ${volume.toFixed(4)}`,
-                        },
-                      ]}
-                      pagination={false}
-                      rowKey={(record) => `${record.price}-${record.volume}`}
-                      size="small"
-                    />
-                  </div>
-                </Col>
-              </Row>
-            </Card>
+            <FormBuyAndSell
+              toastMessage={messageApi}
+              fetchOrderHistory={fetchOrderHistory}
+              fetchMyActiveOrders={fetchActiveOrders}
+            />
           </Col>
         </Row>
+
+        <BuyOrSell loading={loadingWebsocket} orderBook={orderBook} />
       </Content>
     </Layout>
   );

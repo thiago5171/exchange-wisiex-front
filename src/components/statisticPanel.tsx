@@ -3,10 +3,15 @@ import { Typography, Row, Col, Card } from "antd";
 import { ArrowUpOutlined, ArrowDownOutlined } from "@ant-design/icons";
 import { useWebSecketData } from "../hooks/useWebSecketData";
 import { Stats } from "../types/stats";
+import { User } from "../types/user";
 
 const { Text } = Typography;
 
-function StatisticPanel() {
+interface StatisticPanelProps {
+  user: User | null;
+}
+
+function StatisticPanel({ user }: StatisticPanelProps) {
   const { stats } = useWebSecketData();
   const [previousStats, setPreviousStats] = useState<Stats | null>(null);
 
@@ -81,7 +86,10 @@ function StatisticPanel() {
                   ).color,
                 }}
               >
-                {stats?.btcVolume24h?.toFixed(4)} BTC{" "}
+                {stats?.btcVolume24h?.toLocaleString("pt-BR", {
+                  minimumFractionDigits: 3,
+                })}{" "}
+                BTC
                 {
                   getComparison(
                     stats?.btcVolume24h,
@@ -137,41 +145,15 @@ function StatisticPanel() {
 
             <Col xs={24} sm={12} lg={8}>
               <Text strong>Saldo USD: </Text>
-              <span
-                style={{
-                  color: getComparison(
-                    stats?.userUSDBalance,
-                    previousStats?.userUSDBalance
-                  ).color,
-                }}
-              >
-                US$ {stats?.userUSDBalance?.toFixed(2)}{" "}
-                {
-                  getComparison(
-                    stats?.userUSDBalance,
-                    previousStats?.userUSDBalance
-                  ).icon
-                }
-              </span>
+              <span>US$ {user?.usdBalance?.toFixed(2)}</span>
             </Col>
 
             <Col xs={24} sm={12} lg={8}>
               <Text strong>Saldo BTC: </Text>
-              <span
-                style={{
-                  color: getComparison(
-                    stats?.userBTCBalance,
-                    previousStats?.userBTCBalance
-                  ).color,
-                }}
-              >
-                {stats?.userBTCBalance?.toFixed(4)} BTC{" "}
-                {
-                  getComparison(
-                    stats?.userBTCBalance,
-                    previousStats?.userBTCBalance
-                  ).icon
-                }
+              <span>
+                {user?.btcBalance?.toLocaleString("pt-BR", {
+                  minimumFractionDigits: 3,
+                })}
               </span>
             </Col>
           </Row>

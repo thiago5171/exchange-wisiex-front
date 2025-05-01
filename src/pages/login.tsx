@@ -27,7 +27,7 @@ function Login() {
         width: "100%",
         height: "100%",
         minHeight: "100vh",
-        background: "linear-gradient(135deg, #B3FFAB, #12FFF7)",
+        background: "linear-gradient(to right, #616161, #9bc5c3)",
       }}
     >
       <Header
@@ -63,13 +63,13 @@ function Login() {
             style={{ fontSize: 48, color: "#0B5345", marginBottom: 16 }}
           />
           <Title level={3} style={{ color: "#0B5345" }}>
-            Welcome to CryptoExchange
+            Seja bem-vindo a CryptoExchange
           </Title>
           <Text
             type="secondary"
             style={{ marginBottom: 24, display: "block", color: "#117A65" }}
           >
-            Please enter your username to continue
+            Por favor, faça login para continuar
           </Text>
           <Form
             name="login"
@@ -81,11 +81,14 @@ function Login() {
               label="Username"
               name="username"
               rules={[
-                { required: true, message: "Please input your username!" },
+                {
+                  required: true,
+                  message: "Por favor, insira seu nome de usuário!",
+                },
               ]}
             >
               <Input
-                placeholder="Enter your username"
+                placeholder="Insira seu nome de usuário"
                 style={{
                   borderColor: "#0E6251",
                   backgroundColor: "#D1F2EB",

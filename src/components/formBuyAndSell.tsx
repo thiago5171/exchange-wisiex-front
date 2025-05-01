@@ -5,9 +5,15 @@ import orderApi from "../api/order";
 import { CreateOrder } from "../types/order";
 interface FormBuyAndSellProps {
   toastMessage?: any;
+  fetchMyActiveOrders: () => void;
+  fetchOrderHistory: () => void;
 }
 
-function FormBuyAndSell({ toastMessage }: FormBuyAndSellProps) {
+function FormBuyAndSell({
+  toastMessage,
+  fetchMyActiveOrders,
+  fetchOrderHistory,
+}: FormBuyAndSellProps) {
   const [form] = Form.useForm();
   const [total, setTotal] = useState(0);
 
@@ -35,6 +41,8 @@ function FormBuyAndSell({ toastMessage }: FormBuyAndSellProps) {
 
       form.resetFields(["amount", "price"]);
       setTotal(0);
+      fetchMyActiveOrders();
+      fetchOrderHistory();
     } catch (error: any) {
       toastMessage?.open({
         type: "error",
@@ -124,7 +132,6 @@ function FormBuyAndSell({ toastMessage }: FormBuyAndSellProps) {
                 style={{
                   fontWeight: "bold",
                   textAlign: "center",
-                  backgroundColor: "#f5f5f5",
                   borderRadius: "5px",
                 }}
               />

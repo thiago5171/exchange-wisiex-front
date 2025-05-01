@@ -10,12 +10,12 @@ const UserHeader = () => {
   return (
     <Header
       style={{
-        background: "linear-gradient(135deg, #B3FFAB, #12FFF7)",
+        background: "linear-gradient(to right, #616161, #9bc5c3)",
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
         padding: "0 20px",
-        boxShadow: "0 4px 15px rgba(0, 0, 0, 0.2)",
+        boxShadow: "0 4px 15px rgba(8, 0, 0, 0.2)",
       }}
     >
       <Title level={3} style={{ color: "#0E6251", margin: 0 }}>

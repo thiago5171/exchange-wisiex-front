@@ -6,18 +6,25 @@ import orderApi from "../api/order";
 interface MyActiveOrderProps {
   data: myActiveOrder[];
   toastMessage?: any;
+  fetchMyActiveOrders: () => void;
+  loading: boolean;
 }
 
-function MyActiveOrder({ data, toastMessage }: MyActiveOrderProps) {
+function MyActiveOrder({
+  data,
+  toastMessage,
+  loading,
+  fetchMyActiveOrders,
+}: MyActiveOrderProps) {
   const handleCancel = (id: string) => {
     orderApi
       .cancel(id)
-      .then((response) => {
-        console.log("Order cancelled successfully:", response);
+      .then(() => {
         toastMessage.open({
           type: "success",
           content: "Ordem cancelada com sucesso!",
         });
+        fetchMyActiveOrders();
       })
       .catch((error) => {
         console.error("Error cancelling order:", error);
@@ -33,6 +40,7 @@ function MyActiveOrder({ data, toastMessage }: MyActiveOrderProps) {
       <Col xs={24}>
         <Card title="Minhas Ordens Ativas">
           <Table
+            loading={loading}
             style={{ height: "250px", overflowY: "auto" }}
             dataSource={data ?? []}
             columns={[
@@ -40,7 +48,11 @@ function MyActiveOrder({ data, toastMessage }: MyActiveOrderProps) {
                 title: "Quantidade",
                 dataIndex: "amount",
                 key: "amount",
-                render: (amount) => `BTC ${amount.toFixed(4)}`,
+                render: (amount) =>
+                  `BTC ${amount.toLocaleString("pt-BR", {
+                    minimumFractionDigits: 3,
+                    maximumFractionDigits: 3,
+                  })}`,
               },
               {
                 title: "Preço (USD)",
@@ -58,7 +70,7 @@ function MyActiveOrder({ data, toastMessage }: MyActiveOrderProps) {
                       Compra
                     </Tag>
                   ) : (
-                    <Tag color="#f50" style={{ fontSize: "14px" }}>
+                    <Tag color="#ff0000" style={{ fontSize: "14px" }}>
                       Venda
                     </Tag>
                   );
