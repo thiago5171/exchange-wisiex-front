@@ -1,4 +1,4 @@
-import { Card, Typography, Row, Col } from "antd";
+import { Card, Typography, Row, Col, FormInstance } from "antd";
 import { OrderBook } from "../../types/order";
 import SellTable from "./selllTable";
 import BuyTable from "./buyTable";
@@ -6,9 +6,10 @@ import BuyTable from "./buyTable";
 interface BuyOrSellProps {
   orderBook: OrderBook | null;
   loading: boolean;
+  form: FormInstance<any>;
 }
 
-function BuyOrSell({ orderBook, loading }: BuyOrSellProps) {
+function BuyOrSell({ orderBook, loading, form }: BuyOrSellProps) {
   return (
     <Row gutter={[16, 16]} style={{ marginTop: "20px" }}>
       <Col xs={24}>
@@ -20,6 +21,7 @@ function BuyOrSell({ orderBook, loading }: BuyOrSellProps) {
                   Ordens de Compra
                 </Typography.Title>
                 <BuyTable
+                  form={form}
                   data={orderBook ? orderBook.bids : []}
                   loading={loading}
                 />
@@ -32,6 +34,7 @@ function BuyOrSell({ orderBook, loading }: BuyOrSellProps) {
                   Ordens de Venda
                 </Typography.Title>
                 <SellTable
+                  form={form}
                   data={orderBook ? orderBook.asks : []}
                   loading={loading}
                 />

@@ -40,7 +40,10 @@ const UserHeader = () => {
         <Button
           type="primary"
           icon={<LogoutOutlined />}
-          onClick={() => {}}
+          onClick={() => {
+            localStorage.removeItem("token");
+            window.location.href = "/login";
+          }}
           style={{
             background: "#0E6251",
             borderColor: "#0E6251",

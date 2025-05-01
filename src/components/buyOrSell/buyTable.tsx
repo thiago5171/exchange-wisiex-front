@@ -1,16 +1,27 @@
-import { Table } from "antd";
+import { FormInstance, Table } from "antd";
 
 interface SellTableProps {
   data: any[];
   loading: boolean;
+  form: FormInstance<any>;
 }
 
-function BuyTable({ data, loading }: SellTableProps) {
+function BuyTable({ data, loading, form }: SellTableProps) {
   return (
     <Table
       loading={loading}
       style={{ maxHeight: "300px", overflowY: "auto" }}
       dataSource={data}
+      onRow={(record) => ({
+        onClick: () => {
+          form.setFieldsValue({
+            price: record.price,
+            amount: record.volume,
+            type: "SELL",
+            total: (record.price * record.volume).toFixed(2),
+          });
+        },
+      })}
       columns={[
         {
           title: "Preço (USD)",
@@ -32,6 +43,7 @@ function BuyTable({ data, loading }: SellTableProps) {
       pagination={false}
       rowKey={(record) => `${record.price}-${record.volume}`}
       size="small"
+      rowClassName={() => "clickable-row"}
     />
   );
 }

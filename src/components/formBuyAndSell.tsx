@@ -1,5 +1,14 @@
-import { useState } from "react";
-import { Card, Form, Input, Button, Select, Row, Col, InputNumber } from "antd";
+import {
+  Card,
+  Form,
+  Input,
+  Button,
+  Select,
+  Row,
+  Col,
+  InputNumber,
+  FormInstance,
+} from "antd";
 import { typeOrderData } from "../utils/typeOrderData";
 import orderApi from "../api/order";
 import { CreateOrder } from "../types/order";
@@ -7,23 +16,23 @@ interface FormBuyAndSellProps {
   toastMessage?: any;
   fetchMyActiveOrders: () => void;
   fetchOrderHistory: () => void;
+  form: FormInstance<any>;
 }
 
 function FormBuyAndSell({
   toastMessage,
   fetchMyActiveOrders,
   fetchOrderHistory,
+  form,
 }: FormBuyAndSellProps) {
-  const [form] = Form.useForm();
-  const [total, setTotal] = useState(0);
-
   const handleFormChange = (
     _: any,
     allValues: { amount: number; price: number }
   ) => {
     const { amount, price } = allValues;
     const calculatedTotal = (amount || 0) * (price || 0);
-    setTotal(calculatedTotal);
+
+    form.setFieldsValue({ total: calculatedTotal.toFixed(2) });
   };
 
   const handleFormSubmit = async (values: CreateOrder) => {
@@ -39,8 +48,7 @@ function FormBuyAndSell({
         content: "Ordem enviada com sucesso!",
       });
 
-      form.resetFields(["amount", "price"]);
-      setTotal(0);
+      form.resetFields(["amount", "price", "total"]);
       fetchMyActiveOrders();
       fetchOrderHistory();
     } catch (error: any) {
@@ -50,13 +58,14 @@ function FormBuyAndSell({
       });
     }
   };
+
   return (
     <Form
       form={form}
       layout="vertical"
       onValuesChange={handleFormChange}
       onFinish={handleFormSubmit}
-      initialValues={{ type: "BUY" }}
+      initialValues={{ type: "BUY", total: 0 }}
     >
       <Card
         title={
@@ -85,7 +94,6 @@ function FormBuyAndSell({
                 options={typeOrderData}
                 placeholder="Tipo de Ordem"
                 style={{ width: "100%" }}
-                value="BUY"
               />
             </Form.Item>
           </div>
@@ -125,9 +133,8 @@ function FormBuyAndSell({
             </Form.Item>
           </Col>
           <Col xs={24} sm={8}>
-            <Form.Item label="Total (USD)">
+            <Form.Item label="Total (USD)" name="total">
               <Input
-                value={total.toFixed(2)}
                 disabled
                 style={{
                   fontWeight: "bold",

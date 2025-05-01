@@ -8,6 +8,7 @@ import Login from "./pages/login";
 import Order from "./pages/order";
 import { Layout } from "antd";
 import LayoutLogged from "./components/layoutLogged";
+import Collectefees from "./pages/collectedFees";
 
 function App() {
   return (
@@ -24,7 +25,14 @@ function App() {
               </LayoutLogged>
             }
           />
-
+          <Route
+            path="/fees"
+            element={
+              <LayoutLogged>
+                <Collectefees />
+              </LayoutLogged>
+            }
+          />
           <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
       </Layout>

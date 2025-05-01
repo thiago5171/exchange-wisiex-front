@@ -1,15 +1,13 @@
-/* Variáveis globais para cores e fontes */
 :root {
-  --primary-color: #0E6251; /* Verde escuro */
-  --secondary-color: #117A65; /* Verde médio */
-  --accent-color: #B3FFAB; /* Verde claro */
-  --background-gradient: linear-gradient(135deg, #B3FFAB, #12FFF7);
-  --card-background: #E8F8F5; /* Fundo dos cards */
-  --text-color: #0B5345; /* Cor principal do texto */
-  --text-secondary-color: #117A65; /* Cor secundária do texto */
-  --button-hover-color: #0B5345; /* Cor do botão ao passar o mouse */
+  --primary-color: #0E6251; 
+  --secondary-color: #117A65; 
+  --background-gradient: linear-gradient(135deg, #616161, #9bc5c3);
+  --card-background: #E8F8F5;  
+  --text-color: #0B5345;  
+  --text-secondary-color: #117A65; 
+  --button-hover-color: #0B5345;  
   --font-family: "Avenir", "Helvetica", "Arial", sans-serif;
-  --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  --box-shadow: 0 4px 15px rgba(102, 63, 63, 0.2);
 }
 
 body {
@@ -121,4 +119,13 @@ footer {
   body {
     background: var(--background-gradient);
   }
+ 
+}
+.clickable-row {
+  cursor: pointer !important; 
+  transition: background-color 0.3s ease !important;
+}
+
+.clickable-row:hover {
+background-color: #f0f0f0 !important; 
 }

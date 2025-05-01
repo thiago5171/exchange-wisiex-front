@@ -1,11 +1,11 @@
-import { Layout, Row, Col, message } from "antd";
+import { Layout, Row, Col, message, Form } from "antd";
 import { useWebSecketData } from "../hooks/useWebSecketData";
 
 import FormBuyAndSell from "../components/formBuyAndSell";
 import StatisticPanel from "../components/statisticPanel";
 
 import MyActiveOrder from "../components/myActiveOrder";
-import useOrderHooks from "../hooks/useOrderHooks";
+import useOrderHooks from "../hooks/usOrderHooks";
 import { useEffect } from "react";
 import MatchGlobals from "../components/matchGlobals";
 import MyHistory from "../components/myhistory";
@@ -28,6 +28,7 @@ function Order() {
     loading,
   } = useOrderHooks();
   const { user, fetchUser } = useUserHooks();
+  const [form] = Form.useForm();
 
   useEffect(() => {
     fetchOrderHistory();
@@ -73,6 +74,7 @@ function Order() {
 
           <Col xs={24}>
             <FormBuyAndSell
+              form={form}
               toastMessage={messageApi}
               fetchOrderHistory={fetchOrderHistory}
               fetchMyActiveOrders={fetchActiveOrders}
@@ -80,7 +82,11 @@ function Order() {
           </Col>
         </Row>
 
-        <BuyOrSell loading={loadingWebsocket} orderBook={orderBook} />
+        <BuyOrSell
+          loading={loadingWebsocket}
+          orderBook={orderBook}
+          form={form}
+        />
       </Content>
     </Layout>
   );
