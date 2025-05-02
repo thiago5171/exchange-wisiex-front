@@ -21,10 +21,10 @@ const UserHeader = () => {
         justifyContent: "space-between",
         alignItems: "center",
         padding: "0 20px",
-        boxShadow: "0 4px 15px rgba(8, 0, 0, 0.2)",
+        boxShadow: "0 4px 15px rgba(0, 0, 0, 0.2)",
       }}
     >
-      <Title level={3} style={{ color: "#0E6251", margin: 0 }}>
+      <Title level={3} style={{ color: "#000", margin: 0 }}>
         CryptoExchange
       </Title>
 

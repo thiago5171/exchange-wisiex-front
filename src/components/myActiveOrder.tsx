@@ -26,8 +26,7 @@ function MyActiveOrder({
         });
         fetchMyActiveOrders();
       })
-      .catch((error) => {
-        console.error("Error cancelling order:", error);
+      .catch(() => {
         toastMessage.open({
           type: "error",
           content: "Erro ao cancelar a ordem. Tente novamente.",
