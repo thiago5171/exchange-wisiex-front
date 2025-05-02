@@ -1,7 +1,8 @@
 import { FormInstance, Table } from "antd";
+import { Matches } from "../../types/matches";
 
 interface SellTableProps {
-  data: any[];
+  data: Matches[];
   loading: boolean;
   form: FormInstance<any>;
 }

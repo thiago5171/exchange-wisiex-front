@@ -51,7 +51,7 @@ function StatisticPanel({ user }: StatisticPanelProps) {
   };
 
   return (
-    <Row gutter={[16, 16]}>
+    <Row gutter={[24, 4]}>
       <Col xs={24} style={{ paddingLeft: 0, paddingRight: 0 }}>
         <Card
           title="Estatísticas"
@@ -60,7 +60,7 @@ function StatisticPanel({ user }: StatisticPanelProps) {
             boxShadow: "0 4px 15px rgba(0, 0, 0, 0.2)",
           }}
         >
-          <Row gutter={[16, 16]}>
+          <Row gutter={[4, 4]}>
             <Col xs={24}>
               <Text strong>Último Preço: </Text>
               <span

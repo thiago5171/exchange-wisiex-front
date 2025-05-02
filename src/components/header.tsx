@@ -1,5 +1,10 @@
 import { Layout, Typography, Button, Space } from "antd";
-import { LogoutOutlined, UserOutlined } from "@ant-design/icons";
+import {
+  LogoutOutlined,
+  UserOutlined,
+  OrderedListOutlined,
+  DollarOutlined,
+} from "@ant-design/icons";
 import { useUserHooks } from "../hooks/useUserHooks";
 
 const { Header } = Layout;
@@ -7,6 +12,7 @@ const { Text, Title } = Typography;
 
 const UserHeader = () => {
   const { user } = useUserHooks();
+
   return (
     <Header
       style={{
@@ -23,6 +29,30 @@ const UserHeader = () => {
       </Title>
 
       <Space size="large" align="center">
+        <Button
+          type="link"
+          icon={<OrderedListOutlined />}
+          onClick={() => (window.location.href = "/order")}
+          style={{
+            fontSize: "16px",
+            color: "#0B5345",
+          }}
+        >
+          Ordens
+        </Button>
+
+        <Button
+          type="link"
+          icon={<DollarOutlined />}
+          onClick={() => (window.location.href = "/fees")}
+          style={{
+            fontSize: "16px",
+            color: "#0B5345",
+          }}
+        >
+          Taxas de Transação
+        </Button>
+
         <div>
           <UserOutlined style={{ fontSize: "22px", color: "#0E6251" }} />
           <Text

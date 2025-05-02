@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import collectedFeesApi from "../api/collectedFees";
+import { CollectedFees } from "../types/collectedFees";
 
 export const useCollectedFees = () => {
-  const [collectedFees, setCollectedFees] = useState<any[]>([]);
+  const [collectedFees, setCollectedFees] = useState<CollectedFees>();
   const [loading, setLoading] = useState(true);
 
   const fetchCollectedFees = async () => {
@@ -10,8 +11,6 @@ export const useCollectedFees = () => {
     try {
       const data = await collectedFeesApi.getCollectedFees();
       setCollectedFees(data);
-    } catch (error) {
-      console.error("Error fetching collected fees:", error);
     } finally {
       setLoading(false);
     }

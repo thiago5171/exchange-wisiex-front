@@ -8,8 +8,6 @@ export const useUserHooks = () => {
     try {
       const response = await userApi.getUserInfo();
       setUser(response);
-    } catch (error) {
-      console.error("Failed to fetch user info:", error);
     } finally {
     }
   };

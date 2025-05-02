@@ -12,8 +12,6 @@ const useOrderHooks = () => {
       setLoading(true);
       const response = await orderApi.getMyHistory();
       setOrderHistory(response);
-    } catch (error) {
-      console.error("Failed to fetch order history:", error);
     } finally {
       setLoading(false);
     }
@@ -24,8 +22,6 @@ const useOrderHooks = () => {
       setLoading(true);
       const response = await orderApi.getMyActiveOrders();
       setActiveOrders(response);
-    } catch (error) {
-      console.error("Failed to fetch active orders:", error);
     } finally {
       setLoading(false);
     }

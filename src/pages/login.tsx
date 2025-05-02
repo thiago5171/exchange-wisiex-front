@@ -15,10 +15,6 @@ function Login() {
     });
   };
 
-  const onFinishFailed = (errorInfo: any) => {
-    console.error("Failed:", errorInfo);
-  };
-
   return (
     <Layout
       id="login-layout"
@@ -71,12 +67,7 @@ function Login() {
           >
             Por favor, faça login para continuar
           </Text>
-          <Form
-            name="login"
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
-            layout="vertical"
-          >
+          <Form name="login" onFinish={onFinish} layout="vertical">
             <Form.Item
               label="Username"
               name="username"

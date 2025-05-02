@@ -46,12 +46,21 @@ function Order() {
     >
       {contextHolder}
       <Content>
-        <Row gutter={[16, 16]}>
+        <Row gutter={[24, 16]}>
           <Col xs={24}>
             <Col xs={24}>
               <StatisticPanel user={user} />
             </Col>
-
+            <Row gutter={[24, 16]} style={{ marginTop: "20px" }}>
+              <Col xs={24}>
+                <FormBuyAndSell
+                  form={form}
+                  toastMessage={messageApi}
+                  fetchOrderHistory={fetchOrderHistory}
+                  fetchMyActiveOrders={fetchActiveOrders}
+                />
+              </Col>
+            </Row>
             <Row gutter={[16, 16]} style={{ marginTop: "20px" }}>
               <Col xs={24} md={8}>
                 <MatchGlobals data={newMatchs} loading={loadingWebsocket} />
@@ -70,15 +79,6 @@ function Order() {
                 />
               </Col>
             </Row>
-          </Col>
-
-          <Col xs={24}>
-            <FormBuyAndSell
-              form={form}
-              toastMessage={messageApi}
-              fetchOrderHistory={fetchOrderHistory}
-              fetchMyActiveOrders={fetchActiveOrders}
-            />
           </Col>
         </Row>
 

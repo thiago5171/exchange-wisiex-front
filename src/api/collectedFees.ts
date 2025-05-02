@@ -1,9 +1,12 @@
+import { CollectedFees } from "../types/collectedFees";
 import backendClient from "./backendClient";
 
 export class CollectedFeesApi {
-  async getCollectedFees(): Promise<any[]> {
+  async getCollectedFees(): Promise<CollectedFees> {
     try {
-      const response = await backendClient.get<any[]>("/collected-fees");
+      const response = await backendClient.get<CollectedFees>(
+        "/collected-fees"
+      );
 
       return response.data;
     } catch (error: any) {
